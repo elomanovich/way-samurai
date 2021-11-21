@@ -2,19 +2,18 @@ import React from "react";
 import s from './Profile.module.css'
 import {MyPosts} from "./MyPosts/MyPosts";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
-import {PostType} from "../../App";
+import {PostDataType} from "../../App";
 
-export type PostDataType = {
-    postData: Array<PostType>
+export type ProfileDataType = {
+    state: PostDataType
 }
 
 
-export const Profile: React.FC<PostDataType> = (props) => {
-
+export const Profile: React.FC<ProfileDataType> = (props) => {
     return (
         <div className={s.content}>
             <ProfileInfo/>
-            <MyPosts postData={props.postData}/>
+            <MyPosts postData={props.state.postData}/>
         </div>
     )
 }

@@ -1,12 +1,11 @@
 import React from "react";
 import s from './MyPosts.module.css'
 import {Post} from "./Post/Post";
-import {PostDataType} from "../Profile";
+import {PostDataType} from "../../../App";
 
 
 
 export const MyPosts: React.FC<PostDataType> = (props) => {
-
     return (
         <div className={s.postsBlock}>
             <h3>My posts</h3>

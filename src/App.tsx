@@ -20,13 +20,21 @@ export type PostType = {
     message: string
     likeCurrent: number
 }
-export type DataType = {
+export type PostDataType = {
     postData: Array<PostType>
+}
+export type DialogsDataType = {
     dialogs: Array<DialogsType>
     messages: Array<MessageType>
 }
+export type StateType = {
+    state: {
+        profilePage: PostDataType,
+        dialogsPage: DialogsDataType
+    }
+}
 
-const App: React.FC<DataType> = (props) => {
+const App: React.FC<StateType> = (props) => {
     return (
         <BrowserRouter>
             <div className={'app-wrapper'}>
@@ -34,9 +42,9 @@ const App: React.FC<DataType> = (props) => {
                 <Navbar/>
                 <div className={'app-wrapper-content'}>
                     <Route path={'/profile'}
-                           render={() => <Profile postData={props.postData}/>}/>
+                           render={() => <Profile state={props.state.profilePage}/>}/>
                     <Route path={'/dialogs'}
-                           render={() => <Dialogs dialogs={props.dialogs} messages={props.messages}/>}/>
+                           render={() => <Dialogs state={props.state.dialogsPage}/>}/>
                 </div>
             </div>
         </BrowserRouter>
