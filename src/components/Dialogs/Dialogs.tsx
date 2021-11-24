@@ -9,7 +9,13 @@ type DialogsValueType = {
 }
 
 export const Dialogs: React.FC<DialogsValueType> = (props) => {
-debugger
+
+let newTextElement:any = React.createRef()
+    const addPost = () => {
+    let text = newTextElement.current.value
+        alert(text)
+    }
+
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItem}>
@@ -17,6 +23,8 @@ debugger
             </div>
             <div className={s.messages}>
                 {props.state.messages.map((m) => <Message message={m.message} id={m.id}/>)}
+                <textarea ref={newTextElement}></textarea>
+                <button onClick={addPost}>add</button>
             </div>
         </div>
     )

@@ -12,7 +12,7 @@ export const MyPosts: React.FC<PostDataType> = (props) => {
             <div>
                 <textarea/>
                 <div>
-                    <button>Add post</button>
+                    <button onClick={() => {}}>Add post</button>
                 </div>
             </div>
             <div className={s.posts}>
