@@ -21,7 +21,8 @@ export type PostType = {
     likeCurrent: number
 }
 export type PostDataType = {
-    postData: Array<PostType>
+    post: Array<PostType>
+    newPostText: string
 }
 export type DialogsDataType = {
     dialogs: Array<DialogsType>
@@ -32,6 +33,8 @@ export type StateType = {
         profilePage: PostDataType,
         dialogsPage: DialogsDataType
     }
+    addPost: () => void
+    updateNewPostText: (newText:string) => void
 }
 
 const App: React.FC<StateType> = (props) => {
@@ -42,7 +45,9 @@ const App: React.FC<StateType> = (props) => {
             <Navbar/>
             <div className={'app-wrapper-content'}>
                 <Route path={'/profile'}
-                       render={() => <Profile state={props.state.profilePage}/>}/>
+                       render={() => <Profile updateNewPostText={props.updateNewPostText}
+                                              profilePage={props.state.profilePage}
+                                              addPost={props.addPost}/>}/>
                 <Route path={'/dialogs'}
                        render={() => <Dialogs state={props.state.dialogsPage}/>}/>
             </div>

@@ -5,7 +5,10 @@ import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import {PostDataType} from "../../App";
 
 export type ProfileDataType = {
-    state: PostDataType
+    profilePage: PostDataType
+    addPost: () => void
+    updateNewPostText: (newText:string) => void
+
 }
 
 
@@ -13,7 +16,10 @@ export const Profile: React.FC<ProfileDataType> = (props) => {
     return (
         <div className={s.content}>
             <ProfileInfo/>
-            <MyPosts postData={props.state.postData}/>
+            <MyPosts postData={props.profilePage.post}
+                     updateNewPostText={props.updateNewPostText}
+                     newPostText={props.profilePage.newPostText}
+                     addPost={props.addPost}/>
         </div>
     )
 }

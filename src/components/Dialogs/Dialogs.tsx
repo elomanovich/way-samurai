@@ -23,7 +23,7 @@ let newTextElement:any = React.createRef()
             </div>
             <div className={s.messages}>
                 {props.state.messages.map((m) => <Message message={m.message} id={m.id}/>)}
-                <textarea ref={newTextElement}></textarea>
+                <textarea ref={newTextElement}/>
                 <button onClick={addPost}>add</button>
             </div>
         </div>
