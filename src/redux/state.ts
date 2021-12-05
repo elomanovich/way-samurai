@@ -22,22 +22,39 @@ export let state = {
             {id: 2, message: 'Hello'},
             {id: 3, message: 'Yo'},
             {id: 4, message: 'How are you?'},
-        ]
+        ],
+        newMessageText: 'hello'
     }
 }
 
+export const addMessage = () => {
+    const newMessage = {
+        id: 5,
+        message: state.dialogsPage.newMessageText
+    }
+    state.dialogsPage.messages.push(newMessage)
+    state.dialogsPage.newMessageText = ''
+    rerenderEntireThree(state)
+
+}
+
+export const updateNewMessageText = (newText: string) => {
+    state.dialogsPage.newMessageText = newText
+    rerenderEntireThree(state)
+}
+
 export const addPost = () => {
-    debugger
     const newPost = {
-        id:5,
+        id: 5,
         message: state.profilePage.newPostText,
         likeCurrent: 0
     }
     state.profilePage.post.push(newPost)
+    state.profilePage.newPostText = ''
     rerenderEntireThree(state)
 }
 
-export const updateNewPostText = (newText:string) => {
+export const updateNewPostText = (newText: string) => {
     state.profilePage.newPostText = newText
     rerenderEntireThree(state)
 }

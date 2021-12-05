@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App, {DialogsDataType, PostDataType} from './App';
-import {addPost, updateNewPostText} from "./redux/state";
+import {addMessage, addPost, updateNewMessageText, updateNewPostText} from "./redux/state";
 import {BrowserRouter} from "react-router-dom";
 
 
@@ -11,12 +11,16 @@ export type RootStateType = {
     dialogsPage: DialogsDataType
 }
 
-export const rerenderEntireThree = (state:RootStateType) => {
-    debugger
+export const rerenderEntireThree = (state: RootStateType) => {
     ReactDOM.render(
         <BrowserRouter>
             <React.StrictMode>
-                <App state={state} addPost={addPost} updateNewPostText={updateNewPostText}/>
+                <App state={state}
+                     addPost={addPost}
+                     updateNewPostText={updateNewPostText}
+                     addMessage={addMessage}
+                     updateNewMessageText={updateNewMessageText}
+                />
             </React.StrictMode>
         </BrowserRouter>,
         document.getElementById('root')

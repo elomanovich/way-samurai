@@ -5,6 +5,7 @@ import {Navbar} from "./components/Navbar/Navbar";
 import {Profile} from "./components/Profile/Profile";
 import {Dialogs} from "./components/Dialogs/Dialogs";
 import {Route} from 'react-router-dom';
+import {addMessage, updateNewMessageText} from "./redux/state";
 
 export type DialogsType = {
     id: number
@@ -27,6 +28,7 @@ export type PostDataType = {
 export type DialogsDataType = {
     dialogs: Array<DialogsType>
     messages: Array<MessageType>
+    newMessageText: string
 }
 export type StateType = {
     state: {
@@ -35,6 +37,8 @@ export type StateType = {
     }
     addPost: () => void
     updateNewPostText: (newText:string) => void
+    addMessage: () => void
+    updateNewMessageText: (newText: string) => void
 }
 
 const App: React.FC<StateType> = (props) => {
@@ -49,7 +53,11 @@ const App: React.FC<StateType> = (props) => {
                                               profilePage={props.state.profilePage}
                                               addPost={props.addPost}/>}/>
                 <Route path={'/dialogs'}
-                       render={() => <Dialogs state={props.state.dialogsPage}/>}/>
+                       render={() => <Dialogs
+                           updateNewMessageText={props.updateNewMessageText}
+                           state={props.state.dialogsPage}
+                           addMessage={props.addMessage}
+                       />}/>
             </div>
         </div>
     );

@@ -14,13 +14,11 @@ export const MyPosts: React.FC<MyPostPropsType> = (props) => {
 
     const addPost = () => {
         props.addPost()
-        props.updateNewPostText('')
     }
 
     const updateNewText = (e: ChangeEvent<HTMLTextAreaElement>) => {
         let text = e.currentTarget.value
         props.updateNewPostText(text)
-
     }
 
     return (

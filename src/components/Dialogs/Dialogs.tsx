@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {ChangeEvent} from 'react'
 import s from './Dialogs.module.css'
 import {Message} from "./Message/Message";
 import {DialogItem} from "./DialogItem/DialogsItem";
@@ -6,15 +6,20 @@ import {DialogsDataType} from "../../App";
 
 type DialogsValueType = {
     state: DialogsDataType
+    addMessage:() => void
+    updateNewMessageText: (newText:string) => void
 }
 
 export const Dialogs: React.FC<DialogsValueType> = (props) => {
 
-let newTextElement:any = React.createRef()
-    const addPost = () => {
-    let text = newTextElement.current.value
-        alert(text)
+    const updateNewText = (e:ChangeEvent<HTMLTextAreaElement>) => {
+        let text = e.currentTarget.value
+        props.updateNewMessageText(text)
     }
+    const addMessage = () => {
+        props.addMessage()
+    }
+
 
     return (
         <div className={s.dialogs}>
@@ -23,8 +28,8 @@ let newTextElement:any = React.createRef()
             </div>
             <div className={s.messages}>
                 {props.state.messages.map((m) => <Message message={m.message} id={m.id}/>)}
-                <textarea ref={newTextElement}/>
-                <button onClick={addPost}>add</button>
+                <textarea onChange={updateNewText} value={props.state.newMessageText} />
+                <button onClick={addMessage}>add</button>
             </div>
         </div>
     )
