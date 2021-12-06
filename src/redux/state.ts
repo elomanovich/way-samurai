@@ -1,4 +1,6 @@
-import {rerenderEntireThree} from "../render";
+export let rerenderEntireThree = () => {
+    console.log('State changed')
+}
 
 export let state = {
     profilePage: {
@@ -34,13 +36,13 @@ export const addMessage = () => {
     }
     state.dialogsPage.messages.push(newMessage)
     state.dialogsPage.newMessageText = ''
-    rerenderEntireThree(state)
+    rerenderEntireThree()
 
 }
 
 export const updateNewMessageText = (newText: string) => {
     state.dialogsPage.newMessageText = newText
-    rerenderEntireThree(state)
+    rerenderEntireThree()
 }
 
 export const addPost = () => {
@@ -51,11 +53,15 @@ export const addPost = () => {
     }
     state.profilePage.post.push(newPost)
     state.profilePage.newPostText = ''
-    rerenderEntireThree(state)
+    rerenderEntireThree()
 }
 
 export const updateNewPostText = (newText: string) => {
     state.profilePage.newPostText = newText
-    rerenderEntireThree(state)
+    rerenderEntireThree()
+}
+
+export const subscribe = (observer:() => void) => {
+    rerenderEntireThree = observer
 }
 
