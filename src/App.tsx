@@ -5,6 +5,7 @@ import {Navbar} from "./components/Navbar/Navbar";
 import {Profile} from "./components/Profile/Profile";
 import {Dialogs} from "./components/Dialogs/Dialogs";
 import {Route} from 'react-router-dom';
+import {StoreType} from "./redux/state";
 
 export type DialogsType = {
     id: number
@@ -29,18 +30,13 @@ export type DialogsDataType = {
     messages: Array<MessageType>
     newMessageText: string
 }
-export type StateType = {
-    state: {
-        profilePage: PostDataType,
-        dialogsPage: DialogsDataType
-    }
-    addPost: () => void
-    updateNewPostText: (newText:string) => void
-    addMessage: () => void
-    updateNewMessageText: (newText: string) => void
+
+type StorePropsType = {
+    store: StoreType
 }
 
-const App: React.FC<StateType> = (props) => {
+const App: React.FC<StorePropsType> = (props) => {
+    const state = props.store.getState()
     return (
 
         <div className={'app-wrapper'}>
@@ -48,14 +44,14 @@ const App: React.FC<StateType> = (props) => {
             <Navbar/>
             <div className={'app-wrapper-content'}>
                 <Route path={'/profile'}
-                       render={() => <Profile updateNewPostText={props.updateNewPostText}
-                                              profilePage={props.state.profilePage}
-                                              addPost={props.addPost}/>}/>
+                       render={() => <Profile updateNewPostText={props.store.updateNewPostText.bind(props.store)}
+                                              profilePage={state.profilePage}
+                                              addPost={props.store.addPost.bind(props.store)}/>}/>
                 <Route path={'/dialogs'}
                        render={() => <Dialogs
-                           updateNewMessageText={props.updateNewMessageText}
-                           state={props.state.dialogsPage}
-                           addMessage={props.addMessage}
+                           updateNewMessageText={props.store.updateNewMessageText.bind(props.store)}
+                           state={state}
+                           addMessage={props.store.addMessage.bind(props.store)}
                        />}/>
             </div>
         </div>

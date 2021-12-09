@@ -2,13 +2,15 @@ import React, {ChangeEvent} from 'react'
 import s from './Dialogs.module.css'
 import {Message} from "./Message/Message";
 import {DialogItem} from "./DialogItem/DialogsItem";
-import {DialogsDataType} from "../../App";
+import {RootStateType} from "../../index";
 
 type DialogsValueType = {
-    state: DialogsDataType
+    state: RootStateType
     addMessage:() => void
     updateNewMessageText: (newText:string) => void
 }
+
+
 
 export const Dialogs: React.FC<DialogsValueType> = (props) => {
 
@@ -24,11 +26,11 @@ export const Dialogs: React.FC<DialogsValueType> = (props) => {
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItem}>
-                {props.state.dialogs.map((d) => <DialogItem name={d.name} id={d.id}/>)}
+                {props.state.dialogsPage.dialogs.map((d) => <DialogItem name={d.name} id={d.id}/>)}
             </div>
             <div className={s.messages}>
-                {props.state.messages.map((m) => <Message message={m.message} id={m.id}/>)}
-                <textarea onChange={updateNewText} value={props.state.newMessageText} />
+                {props.state.dialogsPage.messages.map((m) => <Message message={m.message} id={m.id}/>)}
+                <textarea onChange={updateNewText} value={props.state.dialogsPage.newMessageText} />
                 <button onClick={addMessage}>add</button>
             </div>
         </div>
