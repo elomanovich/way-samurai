@@ -3,7 +3,8 @@ import s from './Dialogs.module.css'
 import {Message} from "./Message/Message";
 import {DialogItem} from "./DialogItem/DialogsItem";
 import {RootStateType} from "../../index";
-import {ActionType, addMessageActionCreator, updateNewMessageTextActionCreator} from "../../redux/state";
+import {addMessageActionCreator, updateNewMessageTextActionCreator} from "../../redux/dialogs-reducer";
+import {ActionType} from "../../redux/state";
 
 type DialogsValueType = {
     state: RootStateType
@@ -30,7 +31,7 @@ export const Dialogs: React.FC<DialogsValueType> = (props) => {
             </div>
             <div className={s.messages}>
                 {props.state.dialogsPage.messages.map((m) => <Message message={m.message} id={m.id}/>)}
-                <textarea onChange={updateNewText} value={props.state.dialogsPage.newMessageText} />
+                <textarea placeholder={'Added new message'} onChange={updateNewText} value={props.state.dialogsPage.newMessageText} />
                 <button onClick={addMessage}>add</button>
             </div>
         </div>
