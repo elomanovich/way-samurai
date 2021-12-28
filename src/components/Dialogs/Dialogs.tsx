@@ -3,11 +3,11 @@ import s from './Dialogs.module.css'
 import {Message} from "./Message/Message";
 import {DialogItem} from "./DialogItem/DialogsItem";
 import {RootStateType} from "../../index";
+import {ActionType, addMessageActionCreator, updateNewMessageTextActionCreator} from "../../redux/state";
 
 type DialogsValueType = {
     state: RootStateType
-    addMessage:() => void
-    updateNewMessageText: (newText:string) => void
+    dispatch: (action: ActionType) => void
 }
 
 
@@ -16,10 +16,10 @@ export const Dialogs: React.FC<DialogsValueType> = (props) => {
 
     const updateNewText = (e:ChangeEvent<HTMLTextAreaElement>) => {
         let text = e.currentTarget.value
-        props.updateNewMessageText(text)
+        props.dispatch(updateNewMessageTextActionCreator(text))
     }
     const addMessage = () => {
-        props.addMessage()
+        props.dispatch(addMessageActionCreator())
     }
 
 

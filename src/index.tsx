@@ -25,7 +25,7 @@ export const rerenderEntireThree = () => {
     );
 }
 
-store.subscribe(rerenderEntireThree)
+store._subscribe(rerenderEntireThree)
 rerenderEntireThree()
 
 

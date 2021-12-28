@@ -1,16 +1,39 @@
 import {RootStateType} from "../index";
 
+const ADD_POST = 'ADD-POST'
+const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
+const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT'
+const ADD_MESSAGE = 'ADD-MESSAGE'
+
+type AddPostActionType = ReturnType<typeof addPostActionCreator>
+type AddMessageActionType = ReturnType<typeof addMessageActionCreator>
+type UpdateNewPostTextActionType = {
+    type: 'UPDATE-NEW-POST-TEXT'
+    newText: string
+}
+type UpdateNewMessageTextActionType = ReturnType<typeof updateNewMessageTextActionCreator>
+
+export type ActionType =
+    AddPostActionType
+    | AddMessageActionType
+    | UpdateNewPostTextActionType
+    | UpdateNewMessageTextActionType
+
 export type StoreType = {
     _state: RootStateType
-    getState:() => RootStateType
+    _subscribe: (observer: () => void) => void
     _callSubscriber: () => void
-    addMessage: () => void
-    updateNewMessageText: (newText: string) => void
-    addPost: () => void
-    updateNewPostText: (newText: string) => void
-    subscribe: (observer:()=>void) => void
+    getState: () => RootStateType
+    dispatch: (action: ActionType) => void
 }
-
+export const addMessageActionCreator = () => ({type: ADD_MESSAGE} as const)
+export const updateNewMessageTextActionCreator = (newText: string) => ({
+    type: UPDATE_NEW_MESSAGE_TEXT,
+    newText
+} as const)
+export const addPostActionCreator = () => ({type: ADD_POST} as const)
+export const updateNewPostTextActionCreator = (text: string): UpdateNewPostTextActionType =>
+    ({type: UPDATE_NEW_POST_TEXT, newText: text})
 export const store: StoreType = {
     _state: {
         profilePage: {
@@ -38,43 +61,69 @@ export const store: StoreType = {
             newMessageText: 'hello'
         }
     },
-    getState() {
-        return this._state
+    _subscribe(observer) {
+        this._callSubscriber = observer
     },
     _callSubscriber() {
         console.log('State changed')
     },
-    addMessage() {
-        const newMessage = {
-            id: 5,
-            message: this._state.dialogsPage.newMessageText
+    getState() {
+        return this._state
+    },
+    dispatch(action) {
+        if (action.type === 'ADD-POST') {
+            const newPost = {
+                id: 5,
+                message: this._state.profilePage.newPostText,
+                likeCurrent: 0
+            }
+            this._state.profilePage.post.push(newPost)
+            this._state.profilePage.newPostText = ''
+            this._callSubscriber()
+        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
+            this._state.profilePage.newPostText = action.newText
+            this._callSubscriber()
+        } else if (action.type === 'ADD-MESSAGE') {
+            const newMessage = {
+                id: 5,
+                message: this._state.dialogsPage.newMessageText
+            }
+            this._state.dialogsPage.messages.push(newMessage)
+            this._state.dialogsPage.newMessageText = ''
+            this._callSubscriber()
+        } else if (action.type === 'UPDATE-NEW-MESSAGE-TEXT') {
+            this._state.dialogsPage.newMessageText = action.newText
+            this._callSubscriber()
         }
-        this._state.dialogsPage.messages.push(newMessage)
-        this._state.dialogsPage.newMessageText = ''
-        this._callSubscriber()
-
     },
-    updateNewMessageText(newText: string) {
-        this._state.dialogsPage.newMessageText = newText
-        this._callSubscriber()
-    },
-    addPost() {
-        const newPost = {
-            id: 5,
-            message: this._state.profilePage.newPostText,
-            likeCurrent: 0
-        }
-        this._state.profilePage.post.push(newPost)
-        this._state.profilePage.newPostText = ''
-        this._callSubscriber()
-    },
-    updateNewPostText(newText: string) {
-        this._state.profilePage.newPostText = newText
-        this._callSubscriber()
-    },
-    subscribe(observer) {
-        this._callSubscriber = observer
-    },
+    // addMessage() {
+    //     const newMessage = {
+    //         id: 5,
+    //         message: this._state.dialogsPage.newMessageText
+    //     }
+    //     this._state.dialogsPage.messages.push(newMessage)
+    //     this._state.dialogsPage.newMessageText = ''
+    //     this._callSubscriber()
+    //
+    // },
+    // updateNewMessageText(newText: string) {
+    //     this._state.dialogsPage.newMessageText = newText
+    //     this._callSubscriber()
+    // },
+    // addPost() {
+    //     const newPost = {
+    //         id: 5,
+    //         message: this._state.profilePage.newPostText,
+    //         likeCurrent: 0
+    //     }
+    //     this._state.profilePage.post.push(newPost)
+    //     this._state.profilePage.newPostText = ''
+    //     this._callSubscriber()
+    // },
+    // updateNewPostText(newText: string) {
+    //     this._state.profilePage.newPostText = newText
+    //     this._callSubscriber()
+    // },
 }
 
 
