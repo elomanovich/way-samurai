@@ -5,38 +5,16 @@ import {Navbar} from "./components/Navbar/Navbar";
 import {Profile} from "./components/Profile/Profile";
 import {Dialogs} from "./components/Dialogs/Dialogs";
 import {Route} from 'react-router-dom';
-import {StoreType} from "./redux/state";
+import {ActionType, AppStateType} from "./redux/redux-store";
+import {Dispatch} from "redux";
 
-export type DialogsType = {
-    id: number
-    name: string
-}
-export type MessageType = {
-    id: number
-    message: string
+
+type AppPropsType = {
+    dispatch: Dispatch<ActionType>
+    state: AppStateType
 }
 
-export type PostType = {
-    id: number
-    message: string
-    likeCurrent: number
-}
-export type PostDataType = {
-    post: Array<PostType>
-    newPostText: string
-}
-export type DialogsDataType = {
-    dialogs: Array<DialogsType>
-    messages: Array<MessageType>
-    newMessageText: string
-}
-
-type StorePropsType = {
-    store: StoreType
-}
-
-const App: React.FC<StorePropsType> = (props) => {
-    const state = props.store.getState()
+const App: React.FC<AppPropsType> = (props) => {
     return (
 
         <div className={'app-wrapper'}>
@@ -44,13 +22,13 @@ const App: React.FC<StorePropsType> = (props) => {
             <Navbar/>
             <div className={'app-wrapper-content'}>
                 <Route path={'/profile'}
-                       render={() => <Profile dispatch={props.store.dispatch.bind(props.store)}
-                                              profilePage={state.profilePage}
+                       render={() => <Profile dispatch={props.dispatch}
+                                              profilePage={props.state.profilePage}
                        />}/>
                 <Route path={'/dialogs'}
                        render={() => <Dialogs
-                           dispatch={props.store.dispatch.bind(props.store)}
-                           state={state}
+                           dispatch={props.dispatch}
+                           state={props.state}
                        />}/>
             </div>
         </div>
