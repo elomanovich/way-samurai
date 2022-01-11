@@ -13,6 +13,9 @@ export type ActionType =
     | UpdateNewPostTextActionType
     | UpdateNewMessageTextActionType
 
+export type StoreType = {
+    store: typeof store
+}
 const reducers = combineReducers({
     dialogsPage:dialogsReducer,
     profilePage:profileReducer

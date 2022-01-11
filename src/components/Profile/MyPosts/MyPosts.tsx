@@ -21,7 +21,6 @@ export const MyPosts: React.FC<MyPostPropsType> = (props) => {
         let text = e.currentTarget.value
         props.updateNewPostText(text)
     }
-
     return (
         <div className={s.postsBlock}>
             <h3>My posts</h3>
