@@ -16,11 +16,11 @@ export type ActionType =
 export type StoreType = {
     store: typeof store
 }
-const reducers = combineReducers({
-    dialogsPage:dialogsReducer,
-    profilePage:profileReducer
+const rootReducer = combineReducers({
+    dialogsPage: dialogsReducer,
+    profilePage: profileReducer
 })
 
-export type AppStateType = ReturnType<typeof reducers>
+export type AppStateType = ReturnType<typeof rootReducer>
 
-export let store  = createStore(reducers)
+export let store = createStore(rootReducer)

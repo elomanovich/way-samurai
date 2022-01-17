@@ -2,6 +2,7 @@ import {ActionType} from "./redux-store";
 
 const ADD_POST = 'ADD-POST'
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
+
 export type PostType = {
     id: number
     message: string
@@ -12,7 +13,7 @@ export type PostDataType = {
     newPostText: string
 }
 
-let initialState:PostDataType = {
+let initialState: PostDataType = {
     post: [
         {id: 1, message: 'How are you', likeCurrent: 15},
         {id: 2, message: 'It is my first post', likeCurrent: 20},
@@ -22,7 +23,7 @@ let initialState:PostDataType = {
     newPostText: ''
 }
 
-export const profileReducer = (state: PostDataType = initialState, action: ActionType) => {
+export const profileReducer = (state: PostDataType = initialState, action: ActionType): PostDataType => {
     switch (action.type) {
         case ADD_POST:
             const newPost = {

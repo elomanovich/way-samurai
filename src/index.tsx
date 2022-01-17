@@ -7,7 +7,7 @@ import App from './App';
 import {BrowserRouter} from "react-router-dom";
 import {PostDataType} from "./redux/profile-reducer";
 import {DialogsDataType} from "./redux/dialogs-reducer";
-import {Provider} from './StoreContext';
+import {Provider} from "react-redux";
 
 
 export type RootStateType = {
@@ -19,8 +19,8 @@ export const rerenderEntireThree = () => {
     ReactDOM.render(
         <BrowserRouter>
             <React.StrictMode>
-                <Provider  store={store}>
-                <App/>
+                <Provider store={store}>
+                    <App/>
                 </Provider>
             </React.StrictMode>
         </BrowserRouter>,

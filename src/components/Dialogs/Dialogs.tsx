@@ -2,17 +2,11 @@ import React, {ChangeEvent} from 'react'
 import s from './Dialogs.module.css'
 import {Message} from "./Message/Message";
 import {DialogItem} from "./DialogItem/DialogsItem";
-import {DialogsDataType, DialogsType, MessageType} from "../../redux/dialogs-reducer";
+import {DialogType, MessageType} from "../../redux/dialogs-reducer";
+import {DialogsType} from "./DialogsContainer";
 
 
-type DialogsValueType = {
-    state: DialogsDataType
-    updateNewMessageText: (text: string) => void
-    addMessage: () => void
-}
-
-
-export const Dialogs: React.FC<DialogsValueType> = (props) => {
+export const Dialogs: React.FC<DialogsType> = (props) => {
 
     const updateNewText = (e: ChangeEvent<HTMLTextAreaElement>) => {
         let text = e.currentTarget.value
@@ -26,13 +20,13 @@ export const Dialogs: React.FC<DialogsValueType> = (props) => {
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItem}>
-                {props.state.dialogs.map((d: DialogsType) => <DialogItem name={d.name} id={d.id}/>)}
+                {props.dialogsPage.dialogs.map((d: DialogType) => <DialogItem name={d.name} id={d.id}/>)}
             </div>
             <div className={s.messages}>
-                {props.state.messages.map((m: MessageType) => <Message message={m.message} id={m.id}/>)}
+                {props.dialogsPage.messages.map((m: MessageType) => <Message message={m.message} id={m.id}/>)}
                 <textarea placeholder={'Added new message'}
                           onChange={updateNewText}
-                          value={props.state.newMessageText}/>
+                          value={props.dialogsPage.newMessageText}/>
                 <button onClick={addMessage}>add</button>
             </div>
         </div>
