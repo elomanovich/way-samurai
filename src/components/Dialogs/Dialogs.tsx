@@ -20,10 +20,10 @@ export const Dialogs: React.FC<DialogsType> = (props) => {
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItem}>
-                {props.dialogsPage.dialogs.map((d: DialogType) => <DialogItem name={d.name} id={d.id}/>)}
+                {props.dialogsPage.dialogs.map((d: DialogType) => <DialogItem key={d.id} name={d.name} id={d.id}/>)}
             </div>
             <div className={s.messages}>
-                {props.dialogsPage.messages.map((m: MessageType) => <Message message={m.message} id={m.id}/>)}
+                {props.dialogsPage.messages.map((m: MessageType) => <Message key={m.id} message={m.message} id={m.id}/>)}
                 <textarea placeholder={'Added new message'}
                           onChange={updateNewText}
                           value={props.dialogsPage.newMessageText}/>

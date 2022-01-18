@@ -38,17 +38,21 @@ let initialState: DialogsDataType = {
 export const dialogsReducer = (state: DialogsDataType = initialState, action: ActionType): DialogsDataType => {
 
     switch (action.type) {
-        case ADD_MESSAGE:
+        case ADD_MESSAGE: {
             const newMessage = {
                 id: 5,
                 message: state.newMessageText
             }
-            state.messages.push(newMessage)
-            state.newMessageText = ''
-            return state
+            let stateCopy = {...state}
+            stateCopy.messages = [...state.messages]
+            stateCopy.messages.push(newMessage)
+            stateCopy.newMessageText = ''
+            return stateCopy
+        }
         case UPDATE_NEW_MESSAGE_TEXT:
-            state.newMessageText = action.newText
-            return state
+            let stateCopy = {...state}
+            stateCopy.newMessageText = action.newText
+            return stateCopy
         default:
             return state
     }
