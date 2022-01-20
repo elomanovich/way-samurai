@@ -24,7 +24,7 @@ let mapStateToProps = (state: AppStateType): MapStatePropsType => {
 }
 let mapDispatchToProps = (dispatch: Dispatch): MapDispatchPropsType => {
     return {
-        updateNewMessageText: (text) => {
+        updateNewMessageText: (text: string) => {
             dispatch(updateNewMessageTextActionCreator(text))
         },
         addMessage: () => {
