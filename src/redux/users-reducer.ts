@@ -9,7 +9,7 @@ type LocationType = {
     country: string
 }
 
-export type PostType = {
+export type UserType = {
     id: number
     photoUrl: string
     followed: boolean
@@ -17,48 +17,44 @@ export type PostType = {
     status: string
     location: LocationType
 }
-export type PostDataType = {
-    users: Array<PostType>
+export type UsersType = {
+    users: Array<UserType>
 }
 
-let initialState: PostDataType = {
-    users: [
-        {id: 1,photoUrl:'https://image.freepik.com/free-vector/man-avatar-profile-on-round-icon_24640-14044.jpg', followed: true, fullName: 'Zhenya', status: 'Hi me dear friend', location: {city: 'Minsk', country: 'Belarus'}},
-        {id: 2,photoUrl:'https://image.freepik.com/free-vector/man-avatar-profile-on-round-icon_24640-14044.jpg',followed: true, fullName: 'Sasha', status: 'I am a boss', location: {city: 'Kiev', country: 'Ukraine'}},
-        {id: 3,photoUrl:'https://image.freepik.com/free-vector/man-avatar-profile-on-round-icon_24640-14044.jpg',followed: true, fullName: 'Vanya', status: 'I am a men', location: {city: 'Moscow', country: 'Russia'}},
-    ]
+let initialState: UsersType = {
+    users: []
 }
 
-export const usersReducer = (state: PostDataType = initialState, action: ActionType): PostDataType => {
+export const usersReducer = (state: UsersType = initialState, action: ActionType): UsersType => {
     switch (action.type) {
         case FOLLOW:
-            return  {
+            return {
                 ...state,
-                users: state.users.map(u =>{
-                    if (u.id == action.userId){
+                users: state.users.map(u => {
+                    if (u.id === action.userId) {
                         return {...u, followed: true}
                     }
                     return u
-                } )
+                })
             }
         case UNFOLLOW:
-            return  {
+            return {
                 ...state,
-                users: state.users.map(u =>{
-                    if (u.id == action.userId){
+                users: state.users.map(u => {
+                    if (u.id === action.userId) {
                         return {...u, followed: false}
                     }
                     return u
-                } )
+                })
             }
         case SET_USERS: {
-            return {...state, users:[...state.users, ...action.users]}
+            return {...state, users: [...state.users, ...action.users]}
         }
         default:
             return state
     }
 }
 
-export const followAC = () => ({type: FOLLOW, userId} as const)
-export const unfollowAC = () => ({type: UNFOLLOW, userId} as const)
-export const setUsersAC = (users) => ({type: SET_USERS, users} as const)
+export const followAC = (userId: number) => ({type: FOLLOW, userId} as const)
+export const unfollowAC = (userId: number) => ({type: UNFOLLOW, userId} as const)
+export const setUsersAC = (users: Array<UserType>) => ({type: SET_USERS, users} as const)
