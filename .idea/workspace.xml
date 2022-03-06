@@ -3,9 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="bae5ffa0-ae4b-4c64-885c-02642e6bd36b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Navbar/Navbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Navbar/Navbar.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Users/Users.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Users/Users.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Users/UsersContainer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Users/UsersContainer.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -125,7 +123,8 @@
       <workItem from="1641927734222" duration="5477000" />
       <workItem from="1642454114273" duration="15041000" />
       <workItem from="1643640578172" duration="644000" />
-      <workItem from="1643917089716" duration="12161000" />
+      <workItem from="1643917089716" duration="12480000" />
+      <workItem from="1646596776807" duration="1051000" />
     </task>
     <task id="LOCAL-00001" summary="added component Dialogs">
       <created>1633426178322</created>
@@ -295,7 +294,14 @@
       <option name="project" value="LOCAL" />
       <updated>1644096264762</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="added class component">
+      <created>1644099069263</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1644099069263</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -334,7 +340,8 @@
     <MESSAGE value="added usersReducer" />
     <MESSAGE value="refactoring" />
     <MESSAGE value="added axios" />
-    <option name="LAST_COMMIT_MESSAGE" value="added axios" />
+    <MESSAGE value="added class component" />
+    <option name="LAST_COMMIT_MESSAGE" value="added class component" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
