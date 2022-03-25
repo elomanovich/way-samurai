@@ -2,12 +2,12 @@ import {combineReducers, createStore} from "redux";
 import {addMessageActionCreator, dialogsReducer, updateNewMessageTextActionCreator} from "./dialogs-reducer";
 import {addPostActionCreator, profileReducer, updateNewPostTextActionCreator} from "./profile-reducer";
 import {
-    followAC,
-    setCurrentPageAC,
-    setUsersAC,
-    setUsersTotalCountAC,
-    toggleIsFetchingAC,
-    unfollowAC,
+    follow,
+    setCurrentPage,
+    setUsers,
+    setUsersTotalCount,
+    toggleIsFetching,
+    unfollow,
     usersReducer
 } from "./users-reducer";
 
@@ -15,12 +15,12 @@ type AddPostActionType = ReturnType<typeof addPostActionCreator>
 type AddMessageActionType = ReturnType<typeof addMessageActionCreator>
 type UpdateNewPostTextActionType = ReturnType<typeof updateNewPostTextActionCreator>
 type UpdateNewMessageTextActionType = ReturnType<typeof updateNewMessageTextActionCreator>
-type followACType = ReturnType<typeof followAC>
-type unfollowACType = ReturnType<typeof unfollowAC>
-type setUsersACType = ReturnType<typeof setUsersAC>
-type setCurrentPageACType = ReturnType<typeof setCurrentPageAC>
-type setUsersTotalCountACType = ReturnType<typeof setUsersTotalCountAC>
-type toggleIsFetchingACType = ReturnType<typeof toggleIsFetchingAC>
+type followACType = ReturnType<typeof follow>
+type unfollowACType = ReturnType<typeof unfollow>
+type setUsersACType = ReturnType<typeof setUsers>
+type setCurrentPageACType = ReturnType<typeof setCurrentPage>
+type setUsersTotalCountACType = ReturnType<typeof setUsersTotalCount>
+type toggleIsFetchingACType = ReturnType<typeof toggleIsFetching>
 
 export type ActionType =
     AddPostActionType
