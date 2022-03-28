@@ -1,6 +1,6 @@
 import {combineReducers, createStore} from "redux";
 import {addMessageActionCreator, dialogsReducer, updateNewMessageTextActionCreator} from "./dialogs-reducer";
-import {addPostActionCreator, profileReducer, updateNewPostTextActionCreator} from "./profile-reducer";
+import {addPostActionCreator, profileReducer, setUsersProfile, updateNewPostTextActionCreator} from "./profile-reducer";
 import {
     follow,
     setCurrentPage,
@@ -21,6 +21,7 @@ type setUsersACType = ReturnType<typeof setUsers>
 type setCurrentPageACType = ReturnType<typeof setCurrentPage>
 type setUsersTotalCountACType = ReturnType<typeof setUsersTotalCount>
 type toggleIsFetchingACType = ReturnType<typeof toggleIsFetching>
+type SetUserProfileType = ReturnType<typeof setUsersProfile>
 
 export type ActionType =
     AddPostActionType
@@ -33,6 +34,7 @@ export type ActionType =
     | setCurrentPageACType
     | setUsersTotalCountACType
     | toggleIsFetchingACType
+    | SetUserProfileType
 
 export type StoreType = {
     store: typeof store
