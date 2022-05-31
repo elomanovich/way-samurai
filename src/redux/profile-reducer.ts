@@ -1,5 +1,7 @@
 import {ActionType} from "./redux-store";
 import {ProfileType} from "../type/types";
+import {Dispatch} from "redux";
+import {usersAPI} from "../api/api";
 
 const ADD_POST = 'ADD-POST'
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
@@ -52,3 +54,12 @@ export const profileReducer = (state: PostDataType = initialState, action: Actio
 export const addPostActionCreator = () => ({type: ADD_POST} as const)
 export const updateNewPostTextActionCreator = (text: string) => ({type: UPDATE_NEW_POST_TEXT, newText: text} as const)
 export const setUsersProfile = (profile:any ) => ({type: SET_USER_PROFILE, profile} as const)
+
+export const getProfile = (userId: string) => {
+    return (dispatch: Dispatch) => {
+        usersAPI.getProfile(userId)
+            .then(response => {
+                dispatch(setUsersProfile(response.data))
+            })
+    }
+}
