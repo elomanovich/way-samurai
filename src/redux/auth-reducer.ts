@@ -9,7 +9,7 @@ export type initialType = {
     id: number | null
     email: string | null
     login: string | null
-    isAuth: boolean
+    isAuth: boolean | null
 }
 
 let initialState: initialType = {
