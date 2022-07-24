@@ -4,7 +4,6 @@ import {Message} from "./Message/Message";
 import {DialogItem} from "./DialogItem/DialogsItem";
 import {DialogType, MessageType} from "../../redux/dialogs-reducer";
 import {DialogsType} from "./DialogsContainer";
-import { Redirect } from 'react-router-dom';
 
 
 export const Dialogs: React.FC<DialogsType> = (props) => {
@@ -16,7 +15,6 @@ export const Dialogs: React.FC<DialogsType> = (props) => {
     const addMessage = () => {
         props.addMessage()
     }
-   if(!props.isAuth) return <Redirect to={'/login'}/>
 
 
     return (
