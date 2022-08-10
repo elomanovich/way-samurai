@@ -2,11 +2,11 @@ import React from 'react';
 import './App.css';
 import {Navbar} from "./components/Navbar/Navbar";
 import {Route} from 'react-router-dom';
-import {DialogsContainer} from './components/Dialogs/DialogsContainer';
 import ProfileContainer from './components/Profile/ProfileContainer';
 import UsersContainer from "./components/Users/UsersContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import {Login} from "./components/Login/Login";
+import Dialogs from "./components/Dialogs/DialogsContainer";
 
 
 const App: React.FC = () => {
@@ -19,7 +19,7 @@ const App: React.FC = () => {
                 <Route path={'/profile/:userId?'}
                        render={() => <ProfileContainer/>}/>
                 <Route path={'/dialogs'}
-                       render={() => <DialogsContainer/>}/>
+                       render={() => <Dialogs/>}/>
                 <Route path={'/users'}
                        render={() => <UsersContainer/>}/>
                 <Route path={'/login'}

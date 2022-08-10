@@ -11,6 +11,7 @@ import {AppStateType} from "../../redux/redux-store";
 import React from "react";
 import {Users} from "./Users";
 import {Preloader} from "../common/Preloader/Preloader";
+import {compose} from "redux";
 
 class UsersContainer extends React.Component<UsersContainerType> {
 
@@ -71,10 +72,12 @@ let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     }
 }
 
-export default connect(mapStateToProps, {
-    followed,
-    unfollowed,
-    setCurrentPage,
-    toggleFollowingProgress,
-    getUsers
-})(UsersContainer)
+export default compose(
+    connect(mapStateToProps, {
+        followed,
+        unfollowed,
+        setCurrentPage,
+        toggleFollowingProgress,
+        getUsers
+    })
+)(UsersContainer)

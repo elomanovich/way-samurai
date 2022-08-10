@@ -1,6 +1,12 @@
 import {applyMiddleware, combineReducers, createStore} from "redux";
 import {addMessageActionCreator, dialogsReducer, updateNewMessageTextActionCreator} from "./dialogs-reducer";
-import {addPostActionCreator, profileReducer, setUsersProfile, updateNewPostTextActionCreator} from "./profile-reducer";
+import {
+    addPostActionCreator,
+    profileReducer,
+    setStatus,
+    setUsersProfile,
+    updateNewPostTextActionCreator
+} from "./profile-reducer";
 import {
     followSuccess,
     setCurrentPage,
@@ -26,6 +32,7 @@ type toggleIsFetchingACType = ReturnType<typeof toggleIsFetching>
 type SetUserProfileType = ReturnType<typeof setUsersProfile>
 type SetUserData = ReturnType<typeof setUserData>
 type ToggleIsFollowing = ReturnType<typeof toggleFollowingProgress>
+type SetStatusProfile = ReturnType<typeof setStatus>
 
 export type ActionType =
     AddPostActionType
@@ -41,6 +48,7 @@ export type ActionType =
     | SetUserProfileType
     | SetUserData
     | ToggleIsFollowing
+    | SetStatusProfile
 
 export type StoreType = {
     store: typeof store
