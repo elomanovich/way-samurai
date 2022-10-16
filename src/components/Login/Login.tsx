@@ -1,4 +1,4 @@
-import {Field, Form, Formik} from "formik";
+import {Field, Form, Formik, FormikHelpers} from "formik";
 import React from "react";
 
 type PropsType = {}
@@ -6,39 +6,47 @@ type PropsType = {}
 export const Login = (props: PropsType) => {
     return <div>
         <h1>Login</h1>
-        <LoginFormik/>
+        <BasicFormik/>
     </div>
 }
 
-const LoginForm = (props: any) => {
-    return (
-        <form>
-            <div><input placeholder={'Login'}/></div>
-            <div><input placeholder={'Password'}/></div>
-            <div><input type={'checkbox'}/> remember me</div>
-            <div>
-                <button>Login</button>
-            </div>
-        </form>
-    )
+// const LoginForm = (props: any) => {
+//     return (
+//         <form>
+//             <div><input placeholder={'Login'}/></div>
+//             <div><input placeholder={'Password'}/></div>
+//             <div><input type={'checkbox'}/> remember me</div>
+//             <div>
+//                 <button>Login</button>
+//             </div>
+//         </form>
+//     )
+// }
+const validateForm = (values: ValueFormikType) => {
+    const errors = {};
+    return errors
 }
-const LoginFormik = (props: any) => {
+type ValueFormikType = {
+    login: string
+    password: string
+}
+const BasicFormik = () => {
+    const submit = (values: ValueFormikType, {setSubmitting}: FormikHelpers<{ login: string; password: string; }>) => {
+
+    }
     return <div>
         <Formik
             initialValues={{login: '', password: ''}}
-            onSubmit={(formData) => {
-
-            }}>
+            validate={validateForm}
+            onSubmit={submit}
+        >
             {({isSubmitting}) => (
                 <Form>
-                    <div><Field type="text" name="login" placeholder={'Login'}/></div>
-                    <div><Field type="password" name="password" placeholder={'Password'}/></div>
-                    <div><Field type="checkbox" name="rememberMe"/>remember me</div>
-                    <div>
-                        <button type="submit" name="buttonLogin">
-                            Login
-                        </button>
-                    </div>
+                    <div><Field type="login" name="login"/></div>
+                    <div><Field type="password" name="password"/></div>
+                    <button type="submit" disabled={isSubmitting}>
+                        Submit
+                    </button>
                 </Form>
             )}
         </Formik>
