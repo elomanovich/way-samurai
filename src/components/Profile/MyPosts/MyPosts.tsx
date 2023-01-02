@@ -1,8 +1,10 @@
-import React, {ChangeEvent} from "react";
+import React from "react";
 import s from './MyPosts.module.css'
 import {Post} from "./Post/Post";
 import {MyPostsType} from "./MyPostsContainer";
-import {Field, Form, Formik} from "formik";
+import {ErrorMessage, Field, Form, Formik} from "formik";
+
+
 
 
 export const MyPosts: React.FC<MyPostsType> = (props) => {
@@ -29,6 +31,15 @@ type ValueFormikType = {
 type PropsType = {
     onAddPost: (values: string) => void
 }
+const validate = (value: ValueFormikType) => {
+    const errors: any = {}
+    if (!value.message) {
+        errors.message = 'Field is required'
+    } else if(value.message.length > 10) {
+        errors.message = 'Max length is 10 symbols'
+    }
+    return errors
+}
 
 export const AddMyPostsForm = (props: PropsType) => {
     const submit = (values: ValueFormikType) => {
@@ -37,11 +48,13 @@ export const AddMyPostsForm = (props: PropsType) => {
     return (
         <Formik
             initialValues={{message: ''}}
+            validate={validate}
             onSubmit={submit}
         >
-            {() => (
+            {({errors}) => (
                 <Form>
-                    <div><Field type="textarea" name="message" placeholder='Enter your post'/></div>
+                    <div><Field className={errors.message? s.errorField: ''} type="textarea" name="message" placeholder='Enter your post'/></div>
+                    <ErrorMessage className={s.error} name={'message'} component={'div'}/>
                     <button type="submit">
                         Post
                     </button>

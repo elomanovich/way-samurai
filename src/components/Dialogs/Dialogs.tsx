@@ -4,7 +4,7 @@ import {Message} from "./Message/Message";
 import {DialogItem} from "./DialogItem/DialogsItem";
 import {DialogType, MessageType} from "../../redux/dialogs-reducer";
 import {DialogsType} from "./DialogsContainer";
-import {Field, Form, Formik} from 'formik';
+import {ErrorMessage, Field, Form, Formik} from 'formik';
 
 
 export const Dialogs: React.FC<DialogsType> = (props) => {
@@ -31,6 +31,15 @@ type ValueFormikType = {
 type PropsType = {
     addNewMessage: (values: string) => void
 }
+const validate = (value: ValueFormikType) => {
+    const errors: any = {}
+    if (!value.message) {
+        errors.message = 'Field is required'
+    } else if (value.message.length > 50) {
+        errors.message = 'Max length is 50 symbols'
+    }
+    return errors
+}
 
 const AddMessageForm = (props: PropsType) => {
     const submit = (values: ValueFormikType) => {
@@ -40,10 +49,13 @@ const AddMessageForm = (props: PropsType) => {
         <Formik
             initialValues={{message: ''}}
             onSubmit={submit}
+            validate={validate}
         >
-            {() => (
+            {(errors) => (
                 <Form>
-                    <div><Field type="textarea" name="message" placeholder='Enter your message'/></div>
+                    <div><Field className={errors.errors.message ? s.errorField : ''} type="textarea" name="message"
+                                placeholder='Enter your message'/></div>
+                    <ErrorMessage className={s.error} name={'message'} component={'div'}/>
                     <button type="submit">
                         Send
                     </button>

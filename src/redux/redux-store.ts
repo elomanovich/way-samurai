@@ -15,8 +15,9 @@ import {
     unfollowSuccess,
     usersReducer
 } from "./users-reducer";
-import {authReducer, setUserData} from "./auth-reducer";
+import {authReducer, setAuthUserData} from "./auth-reducer";
 import thunkMiddleware from "redux-thunk";
+import {appReducer, initializedSuccess} from "./app-reducer";
 
 type AddPostActionType = ReturnType<typeof addPostActionCreator>
 type AddMessageActionType = ReturnType<typeof addMessageActionCreator>
@@ -27,9 +28,10 @@ type setCurrentPageACType = ReturnType<typeof setCurrentPage>
 type setUsersTotalCountACType = ReturnType<typeof setUsersTotalCount>
 type toggleIsFetchingACType = ReturnType<typeof toggleIsFetching>
 type SetUserProfileType = ReturnType<typeof setUsersProfile>
-type SetUserData = ReturnType<typeof setUserData>
+type SetUserData = ReturnType<typeof setAuthUserData>
 type ToggleIsFollowing = ReturnType<typeof toggleFollowingProgress>
 type SetStatusProfile = ReturnType<typeof setStatus>
+type InitializedSuccess = ReturnType<typeof initializedSuccess>
 
 export type ActionType =
     AddPostActionType
@@ -44,6 +46,7 @@ export type ActionType =
     | SetUserData
     | ToggleIsFollowing
     | SetStatusProfile
+    | InitializedSuccess
 
 export type StoreType = {
     store: typeof store
@@ -52,7 +55,8 @@ const rootReducer = combineReducers({
     dialogsPage: dialogsReducer,
     profilePage: profileReducer,
     usersPage: usersReducer,
-    auth: authReducer
+    auth: authReducer,
+    app: appReducer
 })
 
 export type AppStateType = ReturnType<typeof rootReducer>

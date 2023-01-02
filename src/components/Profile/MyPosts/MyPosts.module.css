@@ -5,3 +5,10 @@
 .posts {
     margin-top: 10px;
 }
+.error {
+    color:blue;
+
+}
+.errorField {
+    border: brown solid 5px;
+}
